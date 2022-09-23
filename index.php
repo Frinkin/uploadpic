@@ -1,4 +1,5 @@
 <?php
+   
    if(isset($_FILES['image'])){
       $errors= array();
       $file_name = $_FILES['image']['name'];
@@ -18,7 +19,7 @@
       }
       
       if(empty($errors)==true) {
-         move_uploaded_file($file_tmp,"temppic/".$file_name);
+         move_uploaded_file($file_tmp,"uploaded-pic/".$file_name);
          echo "Success";
       }else{
          print_r($errors);
@@ -35,20 +36,18 @@
     margin: 15px;
 }
 </style>
+
 <html>
    <body>
-      
-      <form action = "" method = "POST" enctype = "multipart/form-data">
-         <input type = "file" name = "image" />
-         <input type = "submit"/>
-			
+        <form action = "" method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "image" onchange="form.submit()"/>
          <ul>
             <li>Sent file: <?php echo $_FILES['image']['name'];  ?>
             <li>File size: <?php echo $_FILES['image']['size'];  ?>
             <li>File type: <?php echo $_FILES['image']['type'] ?>
          </ul>
-      </form>
-      <img id="display-image" src="./temppic/<?php echo $_FILES['image']['name']; ?>">
-      <input type="submit" name="submit" action="confirm.php" value="oh nyo!">
+        </form>
+        <img id="display-image" src="./uploaded-pic/<?php echo $_FILES['image']['name']; ?>">
    </body>
+   
 </html>
